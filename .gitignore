@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Virtual Environment
+.venv/
+venv/
+
+# Large Models
+models/phobert/
+models/llama_qlora/
+models/gemma_qlora/
+models/bilstm/
+models/textcnn/
+
+# Dataset
+data/raw/
+
+# MacOS
+.DS_Store
+
+# Streamlit cache
+.streamlit/
