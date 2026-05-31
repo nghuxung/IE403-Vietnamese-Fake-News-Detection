@@ -7,18 +7,22 @@ __pycache__/
 .venv/
 venv/
 
-# Large Models
-models/phobert/
-models/llama_qlora/
-models/gemma_qlora/
-models/bilstm/
-models/textcnn/
+# Models
+models/
+*.safetensors
+*.bin
+*.pt
+*.pth
 
-# Dataset
-data/raw/
+# Large model files
+*.safetensors
+*.bin
+*.pt
+*.pth
 
 # MacOS
 .DS_Store
 
 # Streamlit cache
 .streamlit/
+
