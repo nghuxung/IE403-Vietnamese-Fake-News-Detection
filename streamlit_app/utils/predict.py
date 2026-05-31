@@ -1,21 +1,24 @@
 import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import streamlit as st
+from transformers import PhobertTokenizer, AutoModelForSequenceClassification
 
 MODEL_PATH = "nghuxung/phobert-vietnamese-fake-news"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-tokenizer = AutoTokenizer.from_pretrained(
-    MODEL_PATH,
-    use_fast=False
-)
 
-model = AutoModelForSequenceClassification.from_pretrained(
-    MODEL_PATH
-)
+@st.cache_resource
+def load_model():
+    tokenizer = PhobertTokenizer.from_pretrained(MODEL_PATH)
 
-model.to(device)
-model.eval()
+    model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
+    model.to(device)
+    model.eval()
+
+    return tokenizer, model
+
+
+tokenizer, model = load_model()
 
 
 def predict_phobert(text):
@@ -29,6 +32,12 @@ def predict_phobert(text):
         padding=True,
         max_length=256
     )
+
+    if "input_ids" in inputs:
+        inputs["input_ids"] = torch.clamp(
+            inputs["input_ids"],
+            max=model.config.vocab_size - 1
+        )
 
     inputs = {
         key: value.to(device)
