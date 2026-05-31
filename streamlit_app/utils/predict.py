@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-MODEL_PATH = "models/phobert"
+MODEL_PATH = "nghuxung/phobert-vietnamese-fake-news"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
