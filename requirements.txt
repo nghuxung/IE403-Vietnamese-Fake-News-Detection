@@ -10,3 +10,4 @@ seaborn
 torch
 transformers
 sentencepiece
+huggingface_hub
