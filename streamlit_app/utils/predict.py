@@ -2,7 +2,7 @@ import torch
 import streamlit as st
 from transformers import PhobertTokenizer, AutoModelForSequenceClassification
 
-MODEL_PATH = "nghuxung/phobert-vietnamese-fakenews-v2"
+MODEL_PATH = "nghuxung/phobert-fakenews-v2"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
