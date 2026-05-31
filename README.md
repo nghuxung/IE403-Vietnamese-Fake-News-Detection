@@ -261,7 +261,7 @@ IE403-Vietnamese-Fake-News-Detection
 
 # Hướng Dẫn Cài Đặt
 
-Clone repository:
+## 1. Clone Repository
 
 ```bash
 git clone https://github.com/nghuxung/IE403-Vietnamese-Fake-News-Detection.git
@@ -269,17 +269,86 @@ git clone https://github.com/nghuxung/IE403-Vietnamese-Fake-News-Detection.git
 cd IE403-Vietnamese-Fake-News-Detection
 ```
 
-Cài đặt thư viện:
+---
+
+## 2. Tạo Môi Trường Ảo (Khuyến nghị)
+
+### Windows
+
+```bash
+python -m venv .venv
+
+.venv\Scripts\activate
+```
+
+### macOS / Linux
+
+```bash
+python3 -m venv .venv
+
+source .venv/bin/activate
+```
+
+Sau khi kích hoạt thành công, terminal sẽ hiển thị:
+
+```bash
+(.venv)
+```
+
+---
+
+## 3. Cài Đặt Thư Viện
+
+Nâng cấp pip:
+
+```bash
+pip install --upgrade pip
+```
+
+Cài đặt toàn bộ thư viện cần thiết:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Chạy ứng dụng:
+Kiểm tra Streamlit:
+
+```bash
+streamlit --version
+```
+
+---
+
+## 4. Chuẩn Bị Mô Hình
+
+Do kích thước lớn nên các mô hình đã fine-tune không được lưu trực tiếp trên GitHub.
+
+Người dùng cần tải các thư mục mô hình và đặt vào:
+
+```text
+models/
+├── phobert/
+├── llama_qlora/
+├── gemma_qlora/
+├── textcnn/
+└── bilstm/
+```
+
+---
+
+## 5. Chạy Ứng Dụng Streamlit
 
 ```bash
 streamlit run streamlit_app/app.py
 ```
+
+Sau khi chạy thành công:
+
+```text
+Local URL: http://localhost:8501
+```
+
+Mở trình duyệt và truy cập địa chỉ trên để sử dụng hệ thống.
 
 ---
 
