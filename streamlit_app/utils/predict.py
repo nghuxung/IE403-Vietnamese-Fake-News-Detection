@@ -5,8 +5,14 @@ MODEL_PATH = "nghuxung/phobert-vietnamese-fake-news"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
+tokenizer = AutoTokenizer.from_pretrained(
+    MODEL_PATH,
+    use_fast=False
+)
+
+model = AutoModelForSequenceClassification.from_pretrained(
+    MODEL_PATH
+)
 
 model.to(device)
 model.eval()
