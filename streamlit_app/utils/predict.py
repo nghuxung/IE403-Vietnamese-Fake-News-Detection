@@ -10,8 +10,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 @st.cache_resource
 def load_model():
     tokenizer = PhobertTokenizer.from_pretrained(MODEL_PATH)
-
     model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
+
     model.to(device)
     model.eval()
 
@@ -32,12 +32,6 @@ def predict_phobert(text):
         padding=True,
         max_length=256
     )
-
-    if "input_ids" in inputs:
-        inputs["input_ids"] = torch.clamp(
-            inputs["input_ids"],
-            max=model.config.vocab_size - 1
-        )
 
     inputs = {
         key: value.to(device)
