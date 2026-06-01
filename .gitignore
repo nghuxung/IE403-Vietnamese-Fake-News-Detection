@@ -7,14 +7,9 @@ __pycache__/
 .venv/
 venv/
 
-# Models
-models/
-*.safetensors
-*.bin
-*.pt
-*.pth
+# Only root model folder
+/models/
 
-# Large model files
 *.safetensors
 *.bin
 *.pt
@@ -25,4 +20,3 @@ models/
 
 # Streamlit cache
 .streamlit/
-
