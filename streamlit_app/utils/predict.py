@@ -4,32 +4,20 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 MODEL_PATH = "nghuxung/phobert-fakenews-v2"
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+id2label = {
+    0: "REAL",
+    1: "FAKE"
+}
 
 @st.cache_resource
 def load_phobert():
-    tokenizer = AutoTokenizer.from_pretrained(
-        MODEL_PATH,
-        use_fast=False
-    )
-
-    model = AutoModelForSequenceClassification.from_pretrained(
-        MODEL_PATH
-    )
-
-    model.to(device)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, use_fast=False)
+    model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
     model.eval()
-
     return tokenizer, model
 
-
-tokenizer, model = load_phobert()
-
-
-def predict_phobert(text):
-    if text is None or text.strip() == "":
-        return None
+def predict_news(text, model_choice="PhoBERT"):
+    tokenizer, model = load_phobert()
 
     inputs = tokenizer(
         text,
@@ -39,24 +27,15 @@ def predict_phobert(text):
         max_length=256
     )
 
-    inputs = {
-        key: value.to(device)
-        for key, value in inputs.items()
-    }
-
     with torch.no_grad():
         outputs = model(**inputs)
         probs = torch.softmax(outputs.logits, dim=1)[0]
 
-    real_prob = probs[0].item()
-    fake_prob = probs[1].item()
-
-    prediction = "FAKE" if fake_prob > real_prob else "REAL"
-    confidence = max(real_prob, fake_prob)
+    pred_id = int(torch.argmax(probs).item())
 
     return {
-        "prediction": prediction,
-        "confidence": confidence,
-        "real_prob": real_prob,
-        "fake_prob": fake_prob
+        "label": id2label[pred_id],
+        "confidence": probs[pred_id].item() * 100,
+        "real_prob": probs[0].item() * 100,
+        "fake_prob": probs[1].item() * 100
     }
