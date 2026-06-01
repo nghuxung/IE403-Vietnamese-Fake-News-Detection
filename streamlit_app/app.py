@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-from utils.predict import predict_news
+from utils.predict import predict_phobert
 from utils.features import extract_features
 from utils.preprocessing import clean_text
 
@@ -40,9 +40,9 @@ with tab1:
             st.warning("Vui lòng nhập tiêu đề hoặc nội dung bài viết.")
         else:
             with st.spinner("Đang phân tích bằng PhoBERT..."):
-                result = predict_news(full_text)
-            
-            prediction = result["label"]
+                result = predict_phobert(full_text)
+
+            prediction = result["prediction"]
             confidence = result["confidence"]
             real_prob = result["real_prob"]
             fake_prob = result["fake_prob"]
@@ -55,7 +55,7 @@ with tab1:
             col1, col2, col3 = st.columns(3)
 
             col1.metric("Prediction", prediction)
-            col2.metric("Confidence", f"{confidence:.2f}%")
+            col2.metric("Confidence", f"{confidence * 100:.2f}%")
             col3.metric("Model", "PhoBERT")
 
             st.write("### Xác suất dự đoán")
@@ -71,8 +71,8 @@ with tab1:
                 y="Probability"
             )
 
-            st.write(f"REAL: **{real_prob:.2f}%**")
-            st.write(f"FAKE: **{fake_prob:.2f}%**")
+            st.write(f"REAL: **{real_prob * 100:.2f}%**")
+            st.write(f"FAKE: **{fake_prob * 100:.2f}%**")
 
 
 with tab2:
@@ -166,9 +166,9 @@ with tab3:
         text = clean_text(sample["text"])
 
         with st.spinner("Đang dự đoán bằng PhoBERT..."):
-            result = predict_news(text)
-        
-        prediction = result["label"]
+            result = predict_phobert(text)
+
+        prediction = result["prediction"]
         confidence = result["confidence"]
         real_prob = result["real_prob"]
         fake_prob = result["fake_prob"]
@@ -179,7 +179,7 @@ with tab3:
 
         col1.metric("Expected", sample["expected"])
         col2.metric("Predicted", prediction)
-        col3.metric("Confidence", f"{confidence:.2f}%")
+        col3.metric("Confidence", f"{confidence * 100:.2f}%")
 
         if prediction == sample["expected"]:
             st.success("Dự đoán đúng so với nhãn kỳ vọng.")

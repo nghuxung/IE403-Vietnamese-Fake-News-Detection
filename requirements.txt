@@ -11,3 +11,5 @@ torch
 transformers
 sentencepiece
 huggingface_hub
+protobuf
+safetensors

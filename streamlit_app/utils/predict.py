@@ -1,41 +1,47 @@
 import torch
-import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-MODEL_PATH = "nghuxung/phobert-fakenews-final"
+MODEL_PATH = "models/phobert"
 
-id2label = {
-    0: "REAL",
-    1: "FAKE"
-}
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-@st.cache_resource
-def load_phobert():
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, use_fast=False)
-    model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
-    model.eval()
-    return tokenizer, model
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
 
-def predict_news(text, model_choice="PhoBERT"):
-    tokenizer, model = load_phobert()
+model.to(device)
+model.eval()
+
+
+def predict_phobert(text):
+    if text is None or text.strip() == "":
+        return None
 
     inputs = tokenizer(
         text,
         return_tensors="pt",
-        padding=True,
         truncation=True,
+        padding=True,
         max_length=256
     )
+
+    inputs = {
+        key: value.to(device)
+        for key, value in inputs.items()
+    }
 
     with torch.no_grad():
         outputs = model(**inputs)
         probs = torch.softmax(outputs.logits, dim=1)[0]
 
-    pred_id = int(torch.argmax(probs).item())
+    real_prob = probs[0].item()
+    fake_prob = probs[1].item()
+
+    prediction = "FAKE" if fake_prob > real_prob else "REAL"
+    confidence = max(real_prob, fake_prob)
 
     return {
-        "label": id2label[pred_id],
-        "confidence": probs[pred_id].item() * 100,
-        "real_prob": probs[0].item() * 100,
-        "fake_prob": probs[1].item() * 100
+        "prediction": prediction,
+        "confidence": confidence,
+        "real_prob": real_prob,
+        "fake_prob": fake_prob
     }
