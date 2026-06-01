@@ -1,7 +1,5 @@
 # PHÁT HIỆN NỘI DUNG BÁO CHÍ ĐÁNG TIN CẬY VÀ KHÔNG ĐÁNG TIN CẬY TRÊN DỮ LIỆU TIẾNG VIỆT
 
-<div align="center">
-
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-DeepLearning-red)
 ![PhoBERT](https://img.shields.io/badge/PhoBERT-VietnameseNLP-green)
@@ -16,8 +14,6 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-WebApp-red)
 ![HuggingFace](https://img.shields.io/badge/HuggingFace-ModelHub-yellow)
 ![GitHub](https://img.shields.io/badge/GitHub-Repository-black)
-
-</div>
 
 <div align="center">
 
