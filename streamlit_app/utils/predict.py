@@ -2,7 +2,7 @@ import torch
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-MODEL_PATH = "nghuxung/phobert-fakenews-v2"
+MODEL = "nghuxung/phobert-fakenews-final"
 
 id2label = {
     0: "REAL",
