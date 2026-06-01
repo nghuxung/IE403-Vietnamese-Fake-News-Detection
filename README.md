@@ -1,9 +1,23 @@
 # PHÁT HIỆN NỘI DUNG BÁO CHÍ ĐÁNG TIN CẬY VÀ KHÔNG ĐÁNG TIN CẬY TRÊN DỮ LIỆU TIẾNG VIỆT
 
+<div align="center">
+
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
-![PhoBERT](https://img.shields.io/badge/Model-PhoBERT-green)
-![Streamlit](https://img.shields.io/badge/Deployment-Streamlit-red)
-![HuggingFace](https://img.shields.io/badge/HuggingFace-Model-yellow)
+![PyTorch](https://img.shields.io/badge/PyTorch-DeepLearning-red)
+![PhoBERT](https://img.shields.io/badge/PhoBERT-VietnameseNLP-green)
+![LLaMA](https://img.shields.io/badge/LLaMA-QLoRA-orange)
+![Gemma](https://img.shields.io/badge/Gemma-QLoRA-lightgrey)
+
+![Transformers](https://img.shields.io/badge/HuggingFace-Transformers-yellow)
+![ScikitLearn](https://img.shields.io/badge/ScikitLearn-ML-orange)
+![Pandas](https://img.shields.io/badge/Pandas-DataAnalysis-blueviolet)
+![NumPy](https://img.shields.io/badge/NumPy-Scientific-blue)
+
+![Streamlit](https://img.shields.io/badge/Streamlit-WebApp-red)
+![HuggingFace](https://img.shields.io/badge/HuggingFace-ModelHub-yellow)
+![GitHub](https://img.shields.io/badge/GitHub-Repository-black)
+
+</div>
 
 <div align="center">
 
